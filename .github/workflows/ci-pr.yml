@@ -1,0 +1,22 @@
+name: "Continuous Integration - Pull Request"
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  code-tests:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+    steps:
+    - uses: actions/checkout@v7
+    - name: Save PR Number
+      run: |
+        mkdir -p .pr
+        echo "${{ github.event.pull_request.number }}" > .pr/PR_NUMBER
+    - name: Upload PR Number Artifact
+      uses: actions/upload-artifact@v7
+      with:
+        name: pr_number
+        path: .pr/PR_NUMBER
